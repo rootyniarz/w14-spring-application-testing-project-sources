@@ -1,5 +1,10 @@
 plugins {
     id 'java'
+    id 'jacoco'
+}
+
+jacoco {
+    toolVersion = "0.8.8"
 }
 
 group = 'pl.zajavka'
@@ -10,6 +15,8 @@ ext {
     logbackVersion = '1.4.1'
     lombokVersion = '1.18.24'
     springVersion = '5.3.23'
+    junitVersion = '5.9.0'
+    mockitoVersion = '4.8.0'
 }
 
 dependencies {
@@ -23,6 +30,28 @@ dependencies {
     implementation "org.springframework:spring-context:$springVersion"
     implementation "org.springframework:spring-context-support:$springVersion"
     implementation "org.springframework:spring-expression:$springVersion"
+
+    testCompileOnly "org.projectlombok:lombok:$lombokVersion"
+    testAnnotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:$junitVersion"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+    testImplementation "org.mockito:mockito-junit-jupiter:$mockitoVersion"
+
+    testImplementation "org.springframework:spring-test:$springVersion"
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
 }
 
 repositories {
