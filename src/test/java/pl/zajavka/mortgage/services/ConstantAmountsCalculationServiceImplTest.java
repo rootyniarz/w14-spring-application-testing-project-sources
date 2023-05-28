@@ -14,10 +14,10 @@ import pl.zajavka.mortgage.model.InstallmentAmounts;
 import java.math.BigDecimal;
 
 @ExtendWith(MockitoExtension.class)
-class ConstantAmountsCalculationServiceTest {
+class ConstantAmountsCalculationServiceImplTest {
 
     @InjectMocks
-    private ConstantAmountsCalculationService constantAmountsCalculationService = new ConstantAmountsCalculationServiceImpl();
+    private ConstantAmountsCalculationServiceImpl constantAmountsCalculationService;
 
     @Test
     @DisplayName("Calculate installment amounts for first installment")
@@ -25,6 +25,8 @@ class ConstantAmountsCalculationServiceTest {
         //given
         InputData inputData = TestDataFixtures.someInputData();
         InstallmentAmounts expected = TestDataFixtures.someInstallmentAmounts();
+
+
 
         //when
         InstallmentAmounts result = constantAmountsCalculationService.calculate(inputData, null);

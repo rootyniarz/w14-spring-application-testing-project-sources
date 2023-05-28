@@ -19,10 +19,10 @@ import java.time.LocalDate;
 import java.util.stream.Stream;
 
 @ExtendWith(MockitoExtension.class)
-class TimePointCalculationServiceTest {
+class TimePointCalculationServiceImplTest {
 
     @InjectMocks
-    private TimePointCalculationService timePointCalculationService = new TimePointCalculationServiceImpl();
+    private TimePointCalculationServiceImpl timePointCalculationService;
 
     @Test
     @DisplayName("Should calculate first installment time point successfully")
